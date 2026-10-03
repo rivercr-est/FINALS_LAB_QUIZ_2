@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acadalyze</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!--DISPLAY OUTPUT-->
+    <div class="container" id="container">
+
+        <p>Acadalyze</p>
+
+        <h1>Grade Details</h1>
+
+        <div class="details">
+            <h2>Name:</h2>
+            <span id="nameOutput"></span>
+        </div>
+
+        <div class="details">
+            <h2>Grade:</h2>
+            <span id="nameGrade"></span>
+        </div>
+
+        <div class="details">
+            <h2>Remark:</h2>
+            <span id="remarkOutput"></span>
+        </div>
+
+    </div>
+
+
+    <!-- JAVA SCRIPT LOGIC-->
+    <script>
+
+        let confirmResult = false;
+        let name;
+        let grade;
+
+        do {
+
+            alert(`Welcome to Acadalyze!\n
+Your simple and reliable academic grade analyzer. Enter your grades, analyze your academic performance, and get a clear view of your results—all in one place.`);
+
+
+            name = prompt("Enter your name:");
+
+            while (name == null || name.trim() == "") {
+
+                alert("Name cannot be empty. Please enter your name.");
+
+                name = prompt("Enter your name:");
+
+            }
+
+
+            grade = prompt("Enter your grade below to find out your corresponding academic remark.");
+
+            while (grade == null || grade.trim() == "" || isNaN(grade) || Number(grade) <= 0 || Number(grade) > 100) {
+
+                if (grade == null || grade.trim() == "") {
+
+                    alert("Grade cannot be empty. Please enter your grade.");
+
+                } else if (isNaN(grade)) {
+
+                    alert("Invalid grade. Please enter a number.");
+
+                } else if (Number(grade) <= 0) {
+
+                    alert("Grade cannot be zero or negative.");
+
+                } else if (Number(grade) > 100) {
+
+                    alert("Grade cannot be greater than 100");
+
+                }
+
+                grade = prompt("Enter your grade below to find out your corresponding academic remark.");
+
+            }
+
+            grade = Number(grade);
+
+
+            confirmResult = confirm(
+                "Please confirm your information:\n\n" +
+                "Name: " + name + "\n" +
+                "Grade: " + grade + "\n\n" +
+                "Are these data correct? Click OK to continue."
+            );
+        } while (confirmResult != true);
+
+
+        document.getElementById("nameOutput").textContent = name;
+        document.getElementById("nameGrade").textContent = grade;
+
+
+        let container = document.getElementById("container");
+        let remark = document.getElementById("remarkOutput");
+
+
+        if (grade >= 90) {
+
+            remark.textContent = "Excellent";
+            container.style.borderColor = "gold";
+
+        } else if (grade >= 75) {
+
+            remark.textContent = "Passed";
+            container.style.borderColor = "green";
+
+        } else {
+
+            remark.textContent = "Failed";
+            container.style.borderColor = "red";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
